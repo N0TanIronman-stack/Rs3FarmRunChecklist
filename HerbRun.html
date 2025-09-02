@@ -235,7 +235,7 @@
         }
 
         // If checkbox has subcategories, toggle all of them
-        const subList = this.parentElement.parentElement.querySelector("ul.subcategories");
+        const subList = this.parentElement.querySelector("ul.subcategories");
         if (subList) {
           const subBoxes = subList.querySelectorAll("input[type=checkbox]");
           subBoxes.forEach(box => {
