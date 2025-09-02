@@ -1,84 +1,129 @@
-<!DOCTYPE html>
 <html>
+  
 <head>
-  <meta charset="utf-8">
-  <title>Alt1 Checklist Plugin</title>
-  <script src="https://runeapps.org/alt1lib.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #1c1c1c;
-      color: white;
-      padding: 20px;
-    }
-    h1 {
-      color: #134512;
-    }
-    .task {
-      margin: 10px 0;
-    }
-    label {
-      cursor: pointer;
-    }
-    input[type="checkbox"] {
-      transform: scale(1.5);
-      margin-right: 10px;
-    }
-  </style>
+  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
+  <script src="scripts/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://runeapps.org/nis/nis.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script type="text/javascript" src="https://runeapps.org/runeappslib.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://runeapps.org/runeappslib.css">
+  <script src="https://www.unpkg.com/alt1/dist/base/index.js"></script>
+  <script src="https://www.unpkg.com/alt1/dist/ocr/index.js"></script>
+  <script src="https://www.unpkg.com/alt1/dist/chatbox/index.js"></script>
+  <script src="https://www.unpkg.com/alt1/dist/buffs/index.js"></script>
+  <script src="scripts/bosstimer.bundle.js"></script>
 </head>
-<div class="topnav">
-  <a class="active" href="index.html">Home</a>
-  <a href="HerbRun.html">Herb Runs</a>
-  <a href="TreeRun.html">Tree Runs</a>
-  <a href="FruitTreeRun.html">Fruit Tree Runs</a>
-  <a href="BushRun.html">Bush Runs</a>
-</div>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+<body class="nis body" id="body">
+  <div class="container">
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="resizeModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <b>Important Notice</b><br/>
+            Interface transparency can cause issues with the statue indicator, to fix this please set interface transparency to 0%. 
+            (This can be found under <b>Settings > Interfaces > Appearance</b>)<br/>
+            <button type="button" class="btn btn-sm btn-primary mt-2" data-dismiss="modal">Don't show again</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
+    <!-- Resize Modal -->
+    <div class="modal fade" id="resizeModal" tabindex="-1" role="dialog" aria-labelledby="resizeModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            Please manually resize this window up/down<br/>
+            <button type="button" class="btn btn-sm btn-primary mt-2" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 0px 10px;
-  text-decoration: none;
-  font-size: 12px;
-}
+<!-- Navigation Bar -->
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a class="active" href="HerbRun.html">Herb Runs</a>
+        <a href="TreeRun.html">Tree Runs</a>
+        <a href="FruitTreeRun.html">Fruit Tree Runs</a>
+        <a href="BushRun.html">Bush Runs</a>
+    </div>
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
+    <style>
+        body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+        .topnav {overflow: hidden;background-color: #333;}
+        .topnav a {float: left;color: #f2f2f2;text-align: center;padding: 0px 10px;text-decoration: none;font-size: 12px;}
+        .topnav a:hover {background-color: #ddd;color: black;}
+        .topnav a.active {background-color: #134512;color: white;}
+    </style>
 
-.topnav a.active {
-  background-color: #134512;
-  color: white;
-}
-</style>
 
-<body>
-  <h1>Herb Runs</h1>
-  
-  <ul class="categories-list">
-  <li class="category"><input type="checkbox" id="TrollHeimMaster" name="TrollHeimTasks"><label>TrollHeim</label>
-    <a class='collapse-category' href=''>(Hide)</a>
-    <ul class="subcategories">
-      <li class="category"><input type="checkbox" id="TrollHeimTask1" name="TrollHeimTasks"><label>TrollHeim Teleport</label></li>
-      <li class="category"><input type="checkbox"><label>Activate Aura</label></li>
-      <li class="category"><input type="checkbox"><label>Drink Juju Farming Potion</label></li>
-    </ul>
-  </li>
-</ul>
-  
+<!-- Checklist -->
+  <ul class="list">
+      <!-- TrollHeim -->
+      <li class="category"><input type="checkbox" id="TrollHeimMaster" name="TrollHeimTasks"><label>TrollHeim</label>
+          <ul class="subcategories">
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Trollheim Teleport</label>
+                  <img src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" style="max-height: 50px; max-width: 30px;" />
+              </div>
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Activate Greenfinger Aura</label>
+                  <img src="https://runescape.wiki/images/Legendary_greenfingers_aura.png" /> 
+              </div>
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Drink Juju Farming Potion</label>
+                  <img src="https://runescape.wiki/images/Juju_farming_potion_(4).png" /> 
+              </div>
+          </ul>
+      </li>
+
+      <!-- Al Kharid -->
+      <li class="category"><input type="checkbox" id="AlKharidMaster" name="AlKharidTasks"><label>Al Kharid</label>
+          <ul class="subcategories">
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Mystical Sand Seed</label>
+                  <img src="https://runescape.wiki/images/Mystical_sand_seed.png" /> 
+              </div>
+          </ul>
+      </li>
+
+      <!-- Falador -->
+      <li class="category"><input type="checkbox" id="FaladorMaster" name="FaladorTasks"><label>Falador</label>
+          <ul class="subcategories">
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Explorer's Ring</label>
+                  <img src="https://runescape.wiki/images/Explorer's_ring_4.png" /> 
+              </div>
+          </ul>
+      </li>
+
+      <!-- Port Phasmatis -->
+      <li class="category"><input type="checkbox" id="PortPhasMaster" name="PortPhasTasks"><label>Port Phasmatis</label>
+          <ul class="subcategories">
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Ectophial</label>
+                  <img src="https://runescape.wiki/images/Ectophial.png" /> 
+              </div>
+          </ul>
+      </li>
+
+      <!-- Ardougne -->
+      <li class="category"><input type="checkbox" id="ArdyMaster" name="ArdyTasks"><label>Ardougne</label>
+          <ul class="subcategories">
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Manor Farm Teleport</label>
+                  <img src="https://runescape.wiki/images/Manor_farm_Teleport_icon.png" /> 
+              </div>
+          </ul>
+      </li>
+  </ul>
+
+
   <button onclick="resetChecklist()">Reset</button>
   
   <script>
@@ -87,5 +132,10 @@ body {
       document.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
     }
   </script>
+    
 </body>
+
+<script src="scripts/utility.js"></script>
+<script src="scripts/script.js"></script>
+
 </html>
