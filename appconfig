@@ -1,0 +1,7 @@
+{
+  "appname": "My Alt1 Plugin",
+  "description": "A simple starter plugin",
+  "appurl": "index.html",
+  "icon": "icon.png",
+  "apis": ["imagecapture", "overlay"]
+}
