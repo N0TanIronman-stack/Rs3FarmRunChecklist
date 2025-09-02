@@ -17,7 +17,8 @@
 </head>
 
 <body class="nis body" id="body">
-  <div class="container">
+<div style="overflow-y:scroll;">
+  <div class="container" >
     <!-- Update Modal -->
     <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="resizeModal" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -69,8 +70,18 @@
           <ul class="subcategories">
               <div class="container">
                   <input type="checkbox" class="checkbox" id="check1" /><label>Trollheim Teleport</label>
-                  <img src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" style="max-height: 50px; max-width: 30px;" />
+                  <img src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" style="max-height: 30px; max-width: 30px;" />
               </div>
+                  <ul class="subcategories">
+                      <div class="container">
+                          <input type="checkbox" class="checkbox" id="check1" /><label>2 Law Runes</label>
+                          <img src="https://runescape.wiki/images/Law_rune.png" style="max-height: 30px; max-width: 30px;" />
+                      </div>
+                      <div class="container">
+                          <input type="checkbox" class="checkbox" id="check1" /><label>2 Fire Runes</label>
+                          <img src="https://runescape.wiki/images/Fire_rune.png" style="max-height: 30px; max-width: 30px;" />
+                      </div>
+                  </ul>
               <div class="container">
                   <input type="checkbox" class="checkbox" id="check1" /><label>Activate Greenfinger Aura</label>
                   <img src="https://runescape.wiki/images/Legendary_greenfingers_aura.png" /> 
@@ -83,7 +94,7 @@
       </li>
 
       <!-- Al Kharid -->
-      <li class="category"><input type="checkbox" id="AlKharidMaster" name="AlKharidTasks"><label>Al Kharid</label>
+      <li class="category"><input type="checkbox" id="AlKharidMaster" name="AlKharidTasks" style="padding"><label>Al Kharid</label>
           <ul class="subcategories">
               <div class="container">
                   <input type="checkbox" class="checkbox" id="check1" /><label>Mystical Sand Seed</label>
@@ -121,6 +132,16 @@
               </div>
           </ul>
       </li>
+
+      <!-- Priffddnas -->
+      <li class="category"><input type="checkbox" id="PriffMaster" name="PriffTasks"><label>Priffddnas</label>
+          <ul class="subcategories">
+              <div class="container">
+                  <input type="checkbox" class="checkbox" id="check1" /><label>Attuned Teleport Seed</label>
+                  <img src="https://runescape.wiki/images/Attuned_crystal_teleport_seed_detail.png" style="max-height: 30px; max-width: 30px;" />
+              </div>
+          </ul>
+      </li>
   </ul>
 
 
@@ -132,7 +153,7 @@
       document.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
     }
   </script>
-    
+    </Div>
 </body>
 
 <script src="scripts/utility.js"></script>
