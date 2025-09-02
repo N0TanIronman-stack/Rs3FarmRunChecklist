@@ -2,22 +2,49 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>My Alt1 Plugin</title>
+  <title>Alt1 Checklist Plugin</title>
   <script src="https://runeapps.org/alt1lib.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1c1c1c;
+      color: white;
+      padding: 20px;
+    }
+    h1 {
+      color: #66ccff;
+    }
+    .task {
+      margin: 10px 0;
+    }
+    label {
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      transform: scale(1.5);
+      margin-right: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>My First Alt1 Plugin</h1>
-  <p>If this works, you should see a button that overlays text on RuneScape.</p>
-  <button onclick="showOverlay()">Show Overlay</button>
-
+  <h1>Task Checklist</h1>
+  
+  <div class="task">
+    <label><input type="checkbox"> Complete Daily Challenge</label>
+  </div>
+  <div class="task">
+    <label><input type="checkbox"> Check Player-Owned Farm</label>
+  </div>
+  <div class="task">
+    <label><input type="checkbox"> Do Yak Track Task</label>
+  </div>
+  
+  <button onclick="resetChecklist()">Reset</button>
+  
   <script>
-    function showOverlay() {
-      if (!window.alt1) {
-        alert("Alt1 not detected! Open this inside Alt1 Toolkit.");
-        return;
-      }
-      // overlay text at coords (100, 100) for 2 seconds
-      a1lib.overlayText("Hello RS3!", a1lib.mixColor(255, 0, 0), 100, 100, 2000);
+    // Example reset button
+    function resetChecklist() {
+      document.querySelectorAll("input[type=checkbox]").forEach(cb => cb.checked = false);
     }
   </script>
 </body>
