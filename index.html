@@ -1,69 +1,263 @@
-<html>
-  
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>
-  <script src="scripts/jquery-3.4.1.slim.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Runescape 3 Farm Run Tool</title>
   <link rel="stylesheet" type="text/css" href="https://runeapps.org/nis/nis.css" />
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    body {
+      background: url('https://runeapps.org/nis/alt1-currentskin/background.png') repeat !important;
+      background-color:var(--nis-col-back); overflow:hidden; margin:0px; color:var(--nis-col-std);}
+      background-size: cover !important;
+      font-family: 'RuneScape UF', 'Trebuchet MS', sans-serif !important;
+      color: #fff !important; /* if you want white text */
+    		 }
 
-  <script type="text/javascript" src="https://runeapps.org/runeappslib.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://runeapps.org/runeappslib.css">
-  <script src="https://www.unpkg.com/alt1/dist/base/index.js"></script>
-  <script src="https://www.unpkg.com/alt1/dist/ocr/index.js"></script>
-  <script src="https://www.unpkg.com/alt1/dist/chatbox/index.js"></script>
-  <script src="https://www.unpkg.com/alt1/dist/buffs/index.js"></script>
-  <script src="scripts/bosstimer.bundle.js"></script>
-</head>
+    /* Header Navigation */
+    header {
+      background: #343a40;
+      color: #fff;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-<body class="nis body" id="body">
-  <div class="container">
-    <!-- Update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="resizeModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <b>Important Notice</b><br/>
-            Interface transparency can cause issues with the statue indicator, to fix this please set interface transparency to 0%. 
-            (This can be found under <b>Settings > Interfaces > Appearance</b>)<br/>
-            <button type="button" class="btn btn-sm btn-primary mt-2" data-dismiss="modal">Don't show again</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    header button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
 
-    <!-- Resize Modal -->
-    <div class="modal fade" id="resizeModal" tabindex="-1" role="dialog" aria-labelledby="resizeModal" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            Please manually resize this window up/down<br/>
-            <button type="button" class="btn btn-sm btn-primary mt-2" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    header button:hover {
+      color: #28a745;
+    }
 
-<!-- Navigation Bar -->
-    <div class="topnav">
-        <a class="active" href="index.html">Home</a>
-        <a href="HerbRun.html">Herb Runs</a>
-        <a href="TreeRun.html">Tree Runs</a>
-        <a href="FruitTreeRun.html">Fruit Tree Runs</a>
-        <a href="BushRun.html">Bush Runs</a>
-    </div>
+    /* Checklist Container */
+    .page {
+  		display: none;
+  		padding: 2rem;
+  		height: calc(100vh - 64px);
+  		overflow-y: auto;
+  		background: transparent !important;
+					}
 
-    <style>
-        body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
-        .topnav {overflow: hidden;background-color: #333;}
-        .topnav a {float: left;color: #f2f2f2;text-align: center;padding: 0px 10px;text-decoration: none;font-size: 12px;}
-        .topnav a:hover {background-color: #ddd;color: black;}
-        .topnav a.active {background-color: #134512;color: white;}
-    </style>
+    .page.active {
+      display: block;
+    }
+
+    /* Checklist Styling */
+    .checklist {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .item {
+      margin: 0.5rem 0;
+    }
+
+    .bubble {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      background-color: #fff;
+      color: #333;
+      font-weight: none;
+      cursor: pointer;
+      transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+      user-select: none;
+    }
+
+    .bubble.active {
+      background-color: #28a745;
+      border-color: #28a745;
+      color: #fff;
+      animation: fadeToGrey 1.5s forwards;
+    }
+
+    .bubble.completed {
+      background-color: #ccc;
+      border-color: #ccc;
+      color: #666;
+      text-decoration: line-through;
+    }
+
+    @keyframes fadeToGrey {
+      0% { background-color: #28a745; border-color: #28a745; color: #fff; }
+      100% { background-color: #ccc; border-color: #ccc; color: #666; }
+    }
+
+    .sublist {
+      list-style: none;
+      padding-left: 1.5rem;
+      margin-top: .5rem;
+    }
+
+    .sublist .bubble {
+      font-weight: normal;
+      padding: 0.4rem 0.8rem;
+      border-radius: 100px;
+    }
     
+    .icon {
+      max-height: 30px; 
+      max-width: 30px;
+      vertical-align: text-bottom;
+      position: relative;
+  		top: 5px;
+					}
+  </style>
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header>
+    <button onclick="showPage('page1')">Home</button>
+    <button onclick="showPage('page2')">Farm Runs</button>
+    <button onclick="showPage('page3')">Tree Runs</button>
+    <button onclick="showPage('page4')">Fruit Tree Runs</button>
+    <button onclick="showPage('page5')">Bush Runs</button>
+    <button onclick="showPage('page6')">⚙ Settings</button>
+  </header>
+
+  <!-- Pages -->
+  <div id="page1" class="page active">
+    <h2>Items Needed</h2>
+    <ul class="checklist" >
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Master Farmer Outfit</div>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Farming Skillcape</div>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Grace of the Elves</div>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Brooch of the Gods</div>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Wilderness Sword</div>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Herb Runs :</div>
+        <ul class="sublist">
+          <li>
+            <div class="bubble" onclick="toggleBubble(this)">Seeds</div>
+            <img class ="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png"/>
+          </li>
+          <li>
+            <div class="bubble" onclick="toggleBubble(this)">Runes</div>
+            <img class ="icon" src="https://runescape.wiki/images/Fire_rune.png"/>
+            <img class ="icon" src="https://runescape.wiki/images/Law_rune.png"/>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div id="page2" class="page">
+    <h2>Herb Runs</h2>
+    <ul class="checklist" >
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">TrollHeim</div>
+        <ul class="sublist">
+          <li>
+            <div class="bubble" onclick="toggleBubble(this)">TrollHeim Teleport</div><img class ="icon" src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" />
+            <ul class="sublist">
+              <li><div class="bubble" onclick="toggleBubble(this)">2 Fire Runes</div><img class ="icon" src="https://runescape.wiki/images/Fire_rune.png" /></li>
+              <li><div class="bubble" onclick="toggleBubble(this)">2 Law Runes</div><img class ="icon" src="https://runescape.wiki/images/Law_rune.png" /></li>
+            </ul>
+          </li>
+          <li><div class="bubble" onclick="toggleBubble(this)">Activate Aura</div><img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura_detail.png" /></li>
+          <li><div class="bubble" onclick="toggleBubble(this)">Drink Juju Farming Potion</div><img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4)_detail.png" /></li>
+        </ul>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Al Kharid</div>
+        <ul class="sublist">
+          <li>
+            <div class="bubble" onclick="toggleBubble(this)">Mystical Sand Seed</div><img class ="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png" />
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div id="page3" class="page">
+    <h2>Other Checklist</h2>
+    <ul class="checklist">
+      <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
+    </ul>
+  </div>
+  
+  <div id="page4" class="page">
+    <h2>This is Page 4</h2>
+    <ul class="checklist">
+      <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
+    </ul>
+  </div>
+  
+  <div id="page5" class="page">
+    <h2>This is Page 5</h2>
+    <ul class="checklist">
+      <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
+    </ul>
+  </div>
+  
+  <div id="page6" class="page">
+    <h2>This is the Settings page</h2>
+    <ul class="checklist">
+      <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
+    </ul>
+  </div>
+
+  <script>
+    // Page switching
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+    }
+
+    // Checklist toggle
+    function toggleBubble(bubble) {
+      if (bubble.classList.contains('completed')) {
+        resetBubble(bubble);
+        return;
+      }
+
+      if (!bubble.classList.contains('active')) {
+        bubble.classList.add('active');
+        setTimeout(() => {
+          bubble.classList.remove('active');
+          bubble.classList.add('completed');
+          completeDescendants(bubble);
+        }, 500);
+      }
+    }
+
+    // Reset bubble + all descendants
+    function resetBubble(bubble) {
+      bubble.classList.remove('completed', 'active');
+      const descendants = bubble.parentElement.querySelectorAll(".sublist .bubble");
+      descendants.forEach(d => d.classList.remove('completed', 'active'));
+    }
+
+    // Complete all descendants
+    function completeDescendants(bubble) {
+      const descendants = bubble.parentElement.querySelectorAll(".sublist .bubble");
+      descendants.forEach(d => {
+        d.classList.remove('active');
+        d.classList.add('completed');
+      });
+    }
+  </script>
 </body>
-
-<script src="scripts/utility.js"></script>
-<script src="scripts/script.js"></script>
-
 </html>
