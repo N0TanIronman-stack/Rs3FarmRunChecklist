@@ -204,7 +204,6 @@
 
   <h2>Farming Level</h2>
   <form id="filterForm">
-    <label for="filterInput"></label>
     <input type="number" id="filterInput" min="0" />
     <button type="submit">Filter</button>
   </form>
@@ -216,8 +215,12 @@
     <h2>Useful items for any Farming run</h2>
     <h4>(Hover for more information)</h4>
     <ul class="checklist" id="Checklist">
+      <li class="item" data-max="80">
+        <div class="bubble" onclick="toggleBubble(this)" title = "Up to +6% Farming exp">Farmer's Outfit</div>
+        <img class ="icon" src="https://runescape.wiki/images/Farmer's_jacket.png"/>
+      </li>
       <li class="item" data-min="80">
-        <div class="bubble" onclick="toggleBubble(this)" title = " +6% Farming exp &#013;+2% chance of saving seeds &#013;10% chance to harvest more herbs &#013;Herbs auto-cleaned on harvest &#013;Planted herbs are auto-watered.">Master Farmer Outfit</div>
+        <div class="bubble" onclick="toggleBubble(this)" title = "+6% Farming exp &#013;+2% chance of saving seeds &#013;10% chance to harvest more herbs &#013;Herbs auto-cleaned on harvest &#013;Planted herbs are auto-watered.">Master Farmer Outfit</div>
         <img class ="icon" src="https://runescape.wiki/images/Master_farmer_jacket.png"/>
       </li>
       <li class="item" data-min="99">
@@ -314,6 +317,8 @@
     </ul>
   </div>
 
+  
+  
   <!-- Page 2 - Herb Run Page-->
   <div id="page2" class="page">
     <h2>Herb Runs</h2>
@@ -349,6 +354,8 @@
     </ul>
   </div>
 
+  
+  
   <!-- Page 3 - Tree Runs-->
   <div id="page3" class="page">
     <h2>Tree Runs</h2>
@@ -359,6 +366,8 @@
     </ul>
   </div>
   
+  
+  
   <!-- Page 4 - Fruit Tree Runs-->
   <div id="page4" class="page">
     <h2>Fruit Tree Runs</h2>
@@ -366,6 +375,8 @@
       <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
     </ul>
   </div>
+  
+  
   
   <!-- Page 5 -->
   <div id="page5" class="page">
@@ -375,13 +386,18 @@
     </ul>
   </div>
   
+  
+  
   <!-- Page 6 -->
   <div id="page6" class="page">
     <h2>This is the Settings page</h2>
   </div>
 
+  
+  
   <!-- Scripts -->
   <script>
+    
     // Page switching
     function showPage(pageId) {
       document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
@@ -404,6 +420,7 @@
         }, 500);
       }
     }
+    
 		//Hide from list if level is too low
     const form = document.getElementById("filterForm");
     const input = document.getElementById("filterInput");
@@ -415,11 +432,17 @@
 
       listItems.forEach(li => {
         const minValue = parseInt(li.getAttribute("data-min"), 10);
-        if (minValue > value) {
+        const maxValue = parseInt(li.getAttribute("data-max"), 10);
+        
+        // If li doesn't have a max, treat it as infinite
+        const maxCheck = isNaN(maxValue) ? Infinity : maxValue;
+  			const minCheck = isNaN(minValue) ? -Infinity : minValue;
+        
+        if (value < minValue || value > maxValue) {
           li.classList.add("hidden");
-        } else {
-          li.classList.remove("hidden");
-        }
+  			} else {
+    			li.classList.remove("hidden");
+  			}
       });
     });
     
@@ -438,11 +461,25 @@
         d.classList.add('completed');
       });
     }
+    
     // Swaps text to Hamburger menu when screen size is too small
     function toggleMenu() {
+  		const menu = document.getElementById("mobileMenu");
+  		menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    	}
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
       const menu = document.getElementById("mobileMenu");
-      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-    }
+      const hamburger = document.querySelector(".hamburger");
+
+      // If menu is open and click is outside both menu and hamburger
+      if (menu.style.display === "flex" && 
+          !menu.contains(event.target) && 
+          !hamburger.contains(event.target)) {
+        menu.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
