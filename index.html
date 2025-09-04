@@ -7,7 +7,6 @@
   <link rel="stylesheet" type="text/css" href="https://runeapps.org/nis/nis.css" />
   <style>
     body {
-      background: url('https://runeapps.org/nis/alt1-currentskin/background.png') repeat !important;
       background-color:var(--nis-col-back); overflow:hidden; margin:0px; color:var(--nis-col-std);}
       background-size: cover !important;
       font-family: 'RuneScape UF', 'Trebuchet MS', sans-serif !important;
@@ -34,6 +33,7 @@
       font-size: 1rem;
       cursor: pointer;
       transition: color 0.3s;
+      font-family: 'RuneScape UF', 'Trebuchet MS', sans-serif !important;
     }
 
     header button:hover {
@@ -116,7 +116,7 @@
 					}
   </style>
 </head>
-<body>
+<body class="nis body" id="body">
   <!-- Header Navigation -->
   <header>
     <button onclick="showPage('page1')">Home</button>
