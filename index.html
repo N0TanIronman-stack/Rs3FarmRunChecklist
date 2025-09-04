@@ -147,6 +147,10 @@
       0% { background-color: #28a745; border-color: #28a745; color: #fff; }
       100% { background-color: #ccc; border-color: #ccc; color: #666; }
     }
+    
+    li.hidden {
+      display: none;
+    }
 
     .sublist {
       list-style: none;
@@ -198,18 +202,25 @@
     </nav>
   </header>
 
+  <h2>Farming Level</h2>
+  <form id="filterForm">
+    <label for="filterInput"></label>
+    <input type="number" id="filterInput" min="0" />
+    <button type="submit">Filter</button>
+  </form>
+  
   <!-- Pages -->
   
   <!-- Page 1 - Homepage -->
   <div id="page1" class="page active">
     <h2>Useful items for any Farming run</h2>
     <h4>(Hover for more information)</h4>
-    <ul class="checklist" >
-      <li class="item">
+    <ul class="checklist" id="Checklist">
+      <li class="item" data-min="80">
         <div class="bubble" onclick="toggleBubble(this)" title = " +6% Farming exp &#013;+2% chance of saving seeds &#013;10% chance to harvest more herbs &#013;Herbs auto-cleaned on harvest &#013;Planted herbs are auto-watered.">Master Farmer Outfit</div>
         <img class ="icon" src="https://runescape.wiki/images/Master_farmer_jacket.png"/>
       </li>
-      <li class="item">
+      <li class="item" data-min="99">
         <div class="bubble" onclick="toggleBubble(this)" title = "+5% chance to instantly harvest all resources &#013;120 Cape applies Supercompot for free">Farming Skillcape</div>
         <img class ="icon" src="https://runescape.wiki/images/Farming_cape_detail_(2006).png"/>
       </li>
@@ -230,11 +241,11 @@
         <img class ="icon" src="https://runescape.wiki/images/Decorated_farming_urn.png"/>
         <img class ="icon" src="https://runescape.wiki/images/Urn_enhancer.png"/>
       </li>
-      <li class="item">
+      <li class="item" data-min="25">
         <div class="bubble" onclick="toggleBubble(this)" title="10% chance to recover seeds from patches &#013;5% chance when removing a fully grown tree">Scroll of Life</div>
         <img class ="icon" src="https://runescape.wiki/images/Scroll_of_life.png"/>
       </li>
-      <li class="item">
+      <li class="item" data-min="54">
         <div class="bubble" onclick="toggleBubble(this)" title="Unlimited watering can">Magic Watering Can</div>
         <img class ="icon" src="https://runescape.wiki/images/Magic_watering_can.png"/>
       </li>
@@ -393,7 +404,25 @@
         }, 500);
       }
     }
+		//Hide from list if level is too low
+    const form = document.getElementById("filterForm");
+    const input = document.getElementById("filterInput");
+    const listItems = document.querySelectorAll("#Checklist li");
 
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const value = parseInt(input.value, 10);
+
+      listItems.forEach(li => {
+        const minValue = parseInt(li.getAttribute("data-min"), 10);
+        if (minValue > value) {
+          li.classList.add("hidden");
+        } else {
+          li.classList.remove("hidden");
+        }
+      });
+    });
+    
     // Reset bubble + all descendants
     function resetBubble(bubble) {
       bubble.classList.remove('completed', 'active');
