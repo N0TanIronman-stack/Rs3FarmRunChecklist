@@ -175,7 +175,7 @@
   <header>
     <nav class="desktop">
       <button onclick="showPage('page1')">Home</button>
-    	<button onclick="showPage('page2')">Farm Runs</button>
+    	<button onclick="showPage('page2')">Herb Runs</button>
     	<button onclick="showPage('page3')">Tree Runs</button>
     	<button onclick="showPage('page4')">Fruit Tree Runs</button>
     	<button onclick="showPage('page5')">Bush Runs</button>
@@ -188,7 +188,7 @@
     </div>
     <nav class="mobile" id="mobileMenu">
       <button onclick="showPage('page1')">Home</button>
-    	<button onclick="showPage('page2')">Farm Runs</button>
+    	<button onclick="showPage('page2')">Herb Runs</button>
     	<button onclick="showPage('page3')">Tree Runs</button>
     	<button onclick="showPage('page4')">Fruit Tree Runs</button>
     	<button onclick="showPage('page5')">Bush Runs</button>
@@ -197,41 +197,54 @@
   </header>
 
   <!-- Pages -->
+  
+  <!-- Page 1 - Homepage -->
   <div id="page1" class="page active">
-    <h2>Items Needed</h2>
+    <h2>Items Needed for any Farming run</h2>
     <ul class="checklist" >
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Master Farmer Outfit</div>
+        <img class ="icon" src="https://runescape.wiki/images/Master_farmer_jacket.png"/>
       </li>
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Farming Skillcape</div>
+        <img class ="icon" src="https://runescape.wiki/images/Farming_cape_detail_(2006).png"/>
       </li>
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Grace of the Elves</div>
+        <img class ="icon" src="https://runescape.wiki/images/Grace_of_the_elves.png"/>
       </li>
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Brooch of the Gods</div>
+        <img class ="icon" src="https://runescape.wiki/images/Brooch_of_the_Gods.png"/>
       </li>
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Wilderness Sword</div>
+        <img class ="icon" src="https://runescape.wiki/images/Wilderness_sword_4.png"/>
       </li>
+      <br>
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Herb Runs :</div>
         <ul class="sublist">
           <li>
             <div class="bubble" onclick="toggleBubble(this)">Seeds</div>
-            <img class ="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png"/>
+            <img class ="icon" src="https://runescape.wiki/images/Seed_bag.png"/>
           </li>
           <li>
             <div class="bubble" onclick="toggleBubble(this)">Runes</div>
             <img class ="icon" src="https://runescape.wiki/images/Fire_rune.png"/>
             <img class ="icon" src="https://runescape.wiki/images/Law_rune.png"/>
           </li>
+          <li>
+            <div class="bubble" onclick="toggleBubble(this)">Juju Farming Potion</div>
+            <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png"/>
+          </li>
         </ul>
       </li>
     </ul>
   </div>
 
+  <!-- Page 2 - Herb Run Page-->
   <div id="page2" class="page">
     <h2>Herb Runs</h2>
     <ul class="checklist" >
@@ -239,53 +252,62 @@
         <div class="bubble" onclick="toggleBubble(this)">TrollHeim</div>
         <ul class="sublist">
           <li>
-            <div class="bubble" onclick="toggleBubble(this)">TrollHeim Teleport</div><img class ="icon" src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" />
+            <div class="bubble" onclick="toggleBubble(this)">TrollHeim Teleport</div>
+            <img class ="icon" src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" />
             <ul class="sublist">
-              <li><div class="bubble" onclick="toggleBubble(this)">2 Fire Runes</div><img class ="icon" src="https://runescape.wiki/images/Fire_rune.png" /></li>
-              <li><div class="bubble" onclick="toggleBubble(this)">2 Law Runes</div><img class ="icon" src="https://runescape.wiki/images/Law_rune.png" /></li>
+              <li><div class="bubble" onclick="toggleBubble(this)">2 Fire Runes</div>
+                <img class ="icon" src="https://runescape.wiki/images/Fire_rune.png" /></li>
+              <li><div class="bubble" onclick="toggleBubble(this)">2 Law Runes</div>
+                <img class ="icon" src="https://runescape.wiki/images/Law_rune.png" /></li>
             </ul>
           </li>
-          <li><div class="bubble" onclick="toggleBubble(this)">Activate Aura</div><img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura_detail.png" /></li>
-          <li><div class="bubble" onclick="toggleBubble(this)">Drink Juju Farming Potion</div><img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4)_detail.png" /></li>
+          <li><div class="bubble" onclick="toggleBubble(this)">Activate Aura</div>
+            <img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura.png" /></li>
+          <li><div class="bubble" onclick="toggleBubble(this)">Drink Juju Farming Potion</div>
+            <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png" /></li>
         </ul>
       </li>
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)">Al Kharid</div>
         <ul class="sublist">
           <li>
-            <div class="bubble" onclick="toggleBubble(this)">Mystical Sand Seed</div><img class ="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png" />
+            <div class="bubble" onclick="toggleBubble(this)">Mystical Sand Seed</div>
+            <img class ="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png" />
           </li>
         </ul>
       </li>
     </ul>
   </div>
 
+  <!-- Page 3 - Tree Runs-->
   <div id="page3" class="page">
-    <h2>Other Checklist</h2>
+    <h2>Tree Runs</h2>
     <ul class="checklist">
-      <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)">Whatever</div>
+      </li>
     </ul>
   </div>
   
+  <!-- Page 4 - Fruit Tree Runs-->
   <div id="page4" class="page">
-    <h2>This is Page 4</h2>
+    <h2>Fruit Tree Runs</h2>
     <ul class="checklist">
       <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
     </ul>
   </div>
   
+  <!-- Page 5 -->
   <div id="page5" class="page">
-    <h2>This is Page 5</h2>
+    <h2>Bush Runs</h2>
     <ul class="checklist">
       <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
     </ul>
   </div>
   
+  <!-- Page 6 -->
   <div id="page6" class="page">
     <h2>This is the Settings page</h2>
-    <ul class="checklist">
-      <li class="item"><div class="bubble" onclick="toggleBubble(this)">Random Task</div></li>
-    </ul>
   </div>
 
   <script>
