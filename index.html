@@ -72,8 +72,8 @@
       flex-direction: column;
       background: #333;
       position: absolute;
-      top: 60px;
-      right: 20px;
+      top: 20px;
+      left: 5px;
       padding: 10px;
       border-radius: 8px;
     }
@@ -166,7 +166,9 @@
       vertical-align: text-bottom;
       position: relative;
   		top: 5px;
+      z-index: -99;
 					}
+    
   </style>
 </head>
   
@@ -200,27 +202,32 @@
   
   <!-- Page 1 - Homepage -->
   <div id="page1" class="page active">
-    <h2>Items Needed for any Farming run</h2>
+    <h2>Useful items for any Farming run</h2>
+    <h4>(Hover for more information)</h4>
     <ul class="checklist" >
       <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Master Farmer Outfit</div>
+        <div class="bubble" onclick="toggleBubble(this)" title = " +6% Farming exp &#013;+2% chance of saving seeds &#013;10% chance to harvest more herbs &#013;Herbs auto-cleaned on harvest &#013;Planted herbs are auto-watered.">Master Farmer Outfit</div>
         <img class ="icon" src="https://runescape.wiki/images/Master_farmer_jacket.png"/>
       </li>
       <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Farming Skillcape</div>
+        <div class="bubble" onclick="toggleBubble(this)" title = "+5% chance to instantly harvest all resources">Farming Skillcape</div>
         <img class ="icon" src="https://runescape.wiki/images/Farming_cape_detail_(2006).png"/>
       </li>
       <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Grace of the Elves</div>
+        <div class="bubble" onclick="toggleBubble(this)" title = "Can spawn Seren Spirits ">Grace of the Elves</div>
         <img class ="icon" src="https://runescape.wiki/images/Grace_of_the_elves.png"/>
       </li>
       <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Brooch of the Gods</div>
+        <div class="bubble" onclick="toggleBubble(this)" title= "Can spawn Divine Blessings &#013;Stores Farming Urns">Brooch of the Gods</div>
         <img class ="icon" src="https://runescape.wiki/images/Brooch_of_the_Gods.png"/>
       </li>
       <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Wilderness Sword</div>
+        <div class="bubble" onclick="toggleBubble(this)" title="Teleport to wilderness patch">Wilderness Sword</div>
         <img class ="icon" src="https://runescape.wiki/images/Wilderness_sword_4.png"/>
+      </li>
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)" title="Provides more EXP when filled">Farming Urn</div>
+        <img class ="icon" src="https://runescape.wiki/images/Decorated_farming_urn.png"/>
       </li>
       <br>
       <li class="item">
@@ -231,12 +238,12 @@
             <img class ="icon" src="https://runescape.wiki/images/Seed_bag.png"/>
           </li>
           <li>
-            <div class="bubble" onclick="toggleBubble(this)">Runes</div>
+            <div class="bubble" onclick="toggleBubble(this)" title = "2 Fire, 2 Law">Runes</div>
             <img class ="icon" src="https://runescape.wiki/images/Fire_rune.png"/>
             <img class ="icon" src="https://runescape.wiki/images/Law_rune.png"/>
           </li>
           <li>
-            <div class="bubble" onclick="toggleBubble(this)">Juju Farming Potion</div>
+            <div class="bubble" onclick="toggleBubble(this)" title = " Gives a 1/3 chance of picking double herbs for 6 minutes">Juju Farming Potion</div>
             <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png"/>
           </li>
         </ul>
@@ -310,6 +317,7 @@
     <h2>This is the Settings page</h2>
   </div>
 
+  <!-- Scripts -->
   <script>
     // Page switching
     function showPage(pageId) {
