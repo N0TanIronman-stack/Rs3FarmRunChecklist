@@ -39,6 +39,59 @@
     header button:hover {
       color: #28a745;
     }
+    
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    /* --- HAMBURGER ICON --- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+    
+    /* --- MOBILE MENU (HIDDEN BY DEFAULT) --- */
+    nav.mobile {
+      display: none;
+      flex-direction: column;
+      background: #333;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    nav.mobile a {
+      padding: 8px;
+      display: block;
+    }
+
+    /* --- RESPONSIVE BEHAVIOR --- */
+    @media (max-width: 700px) {
+      nav.desktop {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
 
     /* Checklist Container */
     .page {
@@ -116,15 +169,31 @@
 					}
   </style>
 </head>
+  
 <body class="nis body" id="body">
-  <!-- Header Navigation -->
+  <!-- Header -->
   <header>
-    <button onclick="showPage('page1')">Home</button>
-    <button onclick="showPage('page2')">Farm Runs</button>
-    <button onclick="showPage('page3')">Tree Runs</button>
-    <button onclick="showPage('page4')">Fruit Tree Runs</button>
-    <button onclick="showPage('page5')">Bush Runs</button>
-    <button onclick="showPage('page6')">⚙ Settings</button>
+    <nav class="desktop">
+      <button onclick="showPage('page1')">Home</button>
+    	<button onclick="showPage('page2')">Farm Runs</button>
+    	<button onclick="showPage('page3')">Tree Runs</button>
+    	<button onclick="showPage('page4')">Fruit Tree Runs</button>
+    	<button onclick="showPage('page5')">Bush Runs</button>
+    	<button onclick="showPage('page6')">⚙ Settings</button>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav class="mobile" id="mobileMenu">
+      <button onclick="showPage('page1')">Home</button>
+    	<button onclick="showPage('page2')">Farm Runs</button>
+    	<button onclick="showPage('page3')">Tree Runs</button>
+    	<button onclick="showPage('page4')">Fruit Tree Runs</button>
+    	<button onclick="showPage('page5')">Bush Runs</button>
+    	<button onclick="showPage('page6')">⚙ Settings</button>
+    </nav>
   </header>
 
   <!-- Pages -->
@@ -257,6 +326,11 @@
         d.classList.remove('active');
         d.classList.add('completed');
       });
+    }
+    // Swaps text to Hamburger menu when screen size is too small
+    function toggleMenu() {
+      const menu = document.getElementById("mobileMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
     }
   </script>
 </body>
