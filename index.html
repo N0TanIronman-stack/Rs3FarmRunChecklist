@@ -769,6 +769,7 @@
     const guideToggle = document.getElementById("guideToggle");
     const guideControls = document.getElementById("guideControls");
     const wrappers = document.querySelectorAll(".checklist-wrapper");
+    const guideHides = document.querySelectorAll(".guide-hide");
 
     let currentChecklist = 1;
 
@@ -783,9 +784,15 @@
         currentChecklist = 1;
         showChecklist(currentChecklist);
         guideControls.style.display = "block";
+
+        // Hide headers and filter form
+        guideHides.forEach(el => el.classList.add("hidden-guide"));
       } else {
         wrappers.forEach(wrap => wrap.classList.remove("hidden"));
         guideControls.style.display = "none";
+
+        // Show headers and filter form again
+        guideHides.forEach(el => el.classList.remove("hidden-guide"));
       }
     });
 
