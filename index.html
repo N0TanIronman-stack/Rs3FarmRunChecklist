@@ -50,6 +50,16 @@
       font-weight: bold;
     }
     
+    /*-- Guide Mode */
+    .checklist-wrapper {
+      display: block; /* default all visible */
+      margin-bottom: 2rem;
+    }
+
+    .checklist-wrapper.hidden {
+      display: none;
+    }
+    
     /* --- HAMBURGER ICON --- */
     .hamburger {
       display: none;
@@ -249,6 +259,10 @@
       border-radius: 50%;
     }
     
+    .hidden-guide {
+      display: none !important;
+    }
+    
   </style>
 </head>
   
@@ -282,14 +296,14 @@
   </header>
 
   <div class="filter-container">
-    <h2>Farming Level</h2>
-      <form id="filterForm">
+    <h2 class="guide-hide">Farming Level</h2>
+      <form id="filterForm" class="guide-hide">
         <input type="number" id="filterInput" min="1" />
         <button type="submit">Filter</button>
       </form>
     <H2>Guide Mode</H2>
     <label class="switch">
-      <input type="checkbox">
+      <input type="checkbox" id="guideToggle">
       <span class="slider round"></span>
     </label>
 	</div>
@@ -297,7 +311,7 @@
   <!-- Pages -->
   
   <!-- Page 1 - Homepage -->
-  <div id="page1" class="page">
+  <div id="page1" class="page checklist-wrapper">
     <h2>Useful items for any Farming run</h2>
     <h4>(Hover for more information)</h4>
     
@@ -442,10 +456,19 @@
 
   <!-- Page 2 - Herb Run Page-->
   <div id="page2" class="page active">
-    <h2>Herb Runs</h2>
-    <h5>Same rotation for Allotments/Flowers<h5>
+    <div>
+      <h2 class="guide-hide">Herb Runs</h2>
+      <h5 class="guide-hide">Same rotation for Allotments/Flowers<h5>
+    <div>
     
+      
+      <div id="guideControls" style="display:none; text-align:center; margin-top:1rem;">
+        <button onclick="prevChecklist()">Previous</button>
+        <button onclick="nextChecklist()">Next</button>
+      </div>
+      
     <!-- Trollheim-->
+    <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item" data-min="29">
     	<div class="bubble" onclick="toggleBubble(this)" title="We start here, as it's the furthest away from a teleport.">Trollheim</div>
@@ -468,8 +491,10 @@
     		</ul>
   		</li>
 		</ul>
+    </div>
     
     <!-- Garden of Kharid -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item">
     	<div class="bubble" onclick="toggleBubble(this)">Garden of Kharid</div>
@@ -486,8 +511,10 @@
     		</ul>
   		</li>
 		</ul>
+  </div>
      
     <!-- Falador -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item">
     	<div class="bubble" onclick="toggleBubble(this)">Falador</div>
@@ -504,8 +531,10 @@
     		</ul>
   		</li>
 		</ul>
+   </div>
       
     <!-- Port Phasmatys -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item">
     	<div class="bubble" onclick="toggleBubble(this)">Port Phasmatys</div>
@@ -522,8 +551,10 @@
     		</ul>
   		</li>
 		</ul>
+   </div>
       
    <!-- Prifddinas -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item" data-min="75">
     	<div class="bubble" onclick="toggleBubble(this)">Prifddinas</div>
@@ -535,8 +566,10 @@
     		</ul>
   		</li>
 		</ul>
+   </div>
       
    <!-- Manor Farm -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item">
     	<div class="bubble" onclick="toggleBubble(this)">Manor Farm</div>
@@ -552,8 +585,10 @@
     		</ul>
   		</li>
 		</ul>
+  </div>
       
     <!-- Wilderness -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item">
     	<div class="bubble" onclick="toggleBubble(this)">Wilderness</div>
@@ -575,8 +610,10 @@
     		</ul>
   		</li>
 		</ul>
+  </div>
       
     <!-- Catherby -->
+   <div class = "checklist-wrapper">
     <ul class="checklist">
   		<li class="item">
     	<div class="bubble" onclick="toggleBubble(this)">Catherby</div>
@@ -609,6 +646,7 @@
     		</ul>
   		</li>
 		</ul>
+  </div>
       
   </div>
 
@@ -726,6 +764,44 @@
         menu.style.display = "none";
       }
     });
+    
+    <!-- Guide Mode -->
+    const guideToggle = document.getElementById("guideToggle");
+    const guideControls = document.getElementById("guideControls");
+    const wrappers = document.querySelectorAll(".checklist-wrapper");
+
+    let currentChecklist = 1;
+
+    function showChecklist(index) {
+      wrappers.forEach((wrap, i) => {
+        wrap.classList.toggle("hidden", i !== index);
+      });
+    }
+
+    guideToggle.addEventListener("change", function () {
+      if (this.checked) {
+        currentChecklist = 1;
+        showChecklist(currentChecklist);
+        guideControls.style.display = "block";
+      } else {
+        wrappers.forEach(wrap => wrap.classList.remove("hidden"));
+        guideControls.style.display = "none";
+      }
+    });
+
+    function nextChecklist() {
+      if (currentChecklist < wrappers.length - 1) {
+        currentChecklist++;
+        showChecklist(currentChecklist);
+      }
+    }
+
+    function prevChecklist() {
+      if (currentChecklist > 1) {
+        currentChecklist--;
+        showChecklist(currentChecklist);
+      }
+    }
   </script>
 </body>
 </html>
