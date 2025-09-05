@@ -6,12 +6,12 @@
   <title>Runescape 3 Farm Run Tool</title>
   <link rel="stylesheet" type="text/css" href="https://runeapps.org/nis/nis.css" />
   <style>
-    /* FIXED: consolidate the body rule and enable page scrolling */
+    
     body {
       background-color: var(--nis-col-back);
       margin: 0px;
       color: var(--nis-col-std);
-      overflow-y: auto !important; /* <-- allow scrolling */
+      overflow-y: auto !important;
     }
 
     /* Header Navigation */
@@ -96,9 +96,6 @@
     .page {
       display: none;
       padding: 2rem;
-      /* REMOVED: height and internal scrolling so body can scroll */
-      /* height: calc(100vh - 64px); */
-      /* overflow-y: auto; */
       background: transparent !important;
     }
 
@@ -113,7 +110,15 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
       gap: 1rem;
-      margin-bottom: 2rem; /* add some space after each checklist */
+      margin-bottom: 2rem;
+    }
+
+    .sublist {
+      display: block;
+      margin-left: 20px;
+      margin-top: 5px;
+      padding-left: 10px;
+      border-left: 2px solid rgba(255,255,255,0.2);
     }
 
     .item {
@@ -156,12 +161,6 @@
       display: none;
     }
 
-    .sublist {
-      list-style: none;
-      padding-left: 1.5rem;
-      margin-top: .5rem;
-    }
-
     .sublist .bubble {
       font-weight: normal;
       padding: 0.4rem 0.8rem;
@@ -180,19 +179,20 @@
     .filter-container {
       padding: 10px;
       display: flex;
-      align-items: center;   /* vertically centers items */
-      gap: 10px;             /* spacing between text and form */
-      margin-bottom: 0rem;   /* space below the container */
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0rem;
     }
 
     .filter-container h2 {
-      margin: 0;             /* remove default bottom margin */
+      margin: 0;
     }
     
   </style>
 </head>
   
 <body class="nis body" id="body">
+  
   <!-- Header -->
   <header>
     <nav class="desktop">
@@ -203,11 +203,13 @@
       <button onclick="showPage('page5')">Bush Runs</button>
       <button onclick="showPage('page6')">⚙ Settings</button>
     </nav>
+    
     <div class="hamburger" onclick="toggleMenu()">
       <span></span>
       <span></span>
       <span></span>
     </div>
+    
     <nav class="mobile" id="mobileMenu">
       <button onclick="showPage('page1')">Home</button>
       <button onclick="showPage('page2')">Herb Runs</button>
@@ -229,47 +231,58 @@
   <!-- Pages -->
   
   <!-- Page 1 - Homepage -->
-  <div id="page1" class="page active">
+  <div id="page1" class="page">
     <h2>Useful items for any Farming run</h2>
     <h4>(Hover for more information)</h4>
-    <ul class="checklist" id="Checklist">
+    
+    <ul class="checklist">
+      
       <li class="item" data-max="80">
         <div class="bubble" onclick="toggleBubble(this)" title = "Up to +6% Farming exp">Farmer's Outfit</div>
         <img class ="icon" src="https://runescape.wiki/images/Farmer's_jacket.png"/>
       </li>
+      
       <li class="item" data-min="80">
         <div class="bubble" onclick="toggleBubble(this)" title = "+6% Farming exp &#013;+2% chance of saving seeds &#013;10% chance to harvest more herbs &#013;Herbs auto-cleaned on harvest &#013;Planted herbs are auto-watered.">Master Farmer Outfit</div>
         <img class ="icon" src="https://runescape.wiki/images/Master_farmer_jacket.png"/>
       </li>
+      
       <li class="item" data-min="99">
         <div class="bubble" onclick="toggleBubble(this)" title = "+5% chance to instantly harvest all resources &#013;120 Cape applies Supercompot for free">Farming Skillcape</div>
         <img class ="icon" src="https://runescape.wiki/images/Farming_cape_detail_(2006).png"/>
       </li>
+      
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)" title = "Can spawn Seren Spirits ">Grace of the Elves</div>
         <img class ="icon" src="https://runescape.wiki/images/Grace_of_the_elves.png"/>
       </li>
+      
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)" title= "Can spawn Divine Blessings &#013;Stores Farming Urns">Brooch of the Gods</div>
         <img class ="icon" src="https://runescape.wiki/images/Brooch_of_the_Gods.png"/>
       </li>
+      
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)" title= "Spawns Souls that give small lamp worth of exp">Scripture of Elidinis</div>
         <img class ="icon" src="https://runescape.wiki/images/Scripture_of_Elidinis.png"/>
       </li>
+      
       <li class="item">
         <div class="bubble" onclick="toggleBubble(this)" title="Provides more EXP when filled">Farming Urn + Enhancer</div>
         <img class ="icon" src="https://runescape.wiki/images/Decorated_farming_urn.png"/>
         <img class ="icon" src="https://runescape.wiki/images/Urn_enhancer.png"/>
       </li>
+      
       <li class="item" data-min="25">
         <div class="bubble" onclick="toggleBubble(this)" title="10% chance to recover seeds from patches &#013;5% chance when removing a fully grown tree">Scroll of Life</div>
         <img class ="icon" src="https://runescape.wiki/images/Scroll_of_life.png"/>
       </li>
+      
       <li class="item" data-min="54">
         <div class="bubble" onclick="toggleBubble(this)" title="Unlimited watering can">Magic Watering Can</div>
         <img class ="icon" src="https://runescape.wiki/images/Magic_watering_can.png"/>
       </li>
+      
       <li>
         <div class="bubble" onclick="toggleBubble(this)" title = "For teleports">Runes</div>
         <img class ="icon" src="https://runescape.wiki/images/Air_rune.png"/>
@@ -278,92 +291,259 @@
         <img class ="icon" src="https://runescape.wiki/images/Fire_rune.png"/>
         <img class ="icon" src="https://runescape.wiki/images/Law_rune.png"/>
       </li>
+      
     </ul>
     
       <h2>Useful items for specific Farming runs</h2>
       <br>
       
       <!-- Herb Runs -->
-    <ul class="checklist" id="Checklist">
-      <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Herb Runs :</div>
-        <ul class="sublist">
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)">Seeds</div>
-            <img class ="icon" src="https://runescape.wiki/images/Seed_bag.png"/>
-          </li>
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)" title = "+10% chance to save a harvest life when gathering">Magic Secatuers</div>
-            <img class ="icon" src="https://runescape.wiki/images/Magic_secateurs.png"/>
-          </li>
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)" title = " Gives a 1/3 chance of picking double herbs for 6 minutes">Juju Farming Potion</div>
-            <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png"/>
-          </li>
-          <li class="item">
-            <div class="bubble" onclick="toggleBubble(this)" title="Teleport to wilderness patch">Wilderness Sword</div>
-            <img class ="icon" src="https://runescape.wiki/images/Wilderness_sword_4.png"/>
-          </li>
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)" title = "Up to 15% chance to gather extra crops from patches">Greenfingers Aura</div>
-            <img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura.png"/>
-          </li>
-        </ul>
+    <H1>Herb Runs:</H1>
+    <ul class="checklist">
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)">Seeds</div>
+        <img class ="icon" src="https://runescape.wiki/images/Seed_bag.png"/>
       </li>
+      
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)" title = "+10% chance to save a harvest life when gathering">Magic Secatuers</div>
+        <img class ="icon" src="https://runescape.wiki/images/Magic_secateurs.png"/>
+      </li>
+      
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)" title = " Gives a 1/3 chance of picking double herbs for 6 minutes">Juju Farming Potion</div>
+        <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png"/>
+      </li>
+      
+      <li class="item">
+        <div class="bubble" onclick="toggleBubble(this)" title="Teleport to wilderness patch">Wilderness Sword</div>
+        <img class ="icon" src="https://runescape.wiki/images/Wilderness_sword_4.png"/>
+      </li>
+      
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)" title = "Up to 15% chance to gather extra crops from patches">Greenfingers Aura</div>
+        <img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura.png"/>
+      </li>
+      
     </ul>
     
       <br>
-     <ul class="checklist" id="Checklist">
-      <!-- Tree Runs -->
-      <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Tree Runs :</div>
-        <ul class="sublist">
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)">Saplings</div>
-            <img class ="icon" src="https://runescape.wiki/images/Yew_sapling.png"/>
-          </li>
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)" title = " Gives a 1/3 chance of picking double herbs for 6 minutes">Juju Farming Potion</div>
-            <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png"/>
-          </li>
-        </ul>
+    
+    <!-- Tree Runs -->
+    <H1>Tree Runs:</H1>
+     <ul class="checklist">
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)">Saplings</div>
+        <img class ="icon" src="https://runescape.wiki/images/Yew_sapling.png"/>
       </li>
+       
+    </ul>
+    
+    <br>
+    
+    <!-- Fruit Tree Runs -->
+    <H1>Fruit Tree Runs:</H1>
+     <ul class="checklist">
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)">Saplings</div>
+        <img class ="icon" src="https://runescape.wiki/images/Papaya_sapling.png"/>
+      </li>
+       
+      <li>
+       <div class="bubble" onclick="toggleBubble(this)" title = "Up to 15% chance to gather extra crops from patches">Greenfingers Aura</div>
+       <img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura.png"/>
+      </li>
+       
+    </ul>
+    
+    <br>
+    
+    <!-- Bush Runs -->
+    <H1>Bush Runs:</H1>
+     <ul class="checklist">
+      <li>
+        <div class="bubble" onclick="toggleBubble(this)">Seeds</div>
+        <img class ="icon" src="https://runescape.wiki/images/Seed_bag.png"/>
+      </li>
+       
+       <li>
+        <div class="bubble" onclick="toggleBubble(this)" title = "Up to 15% chance to gather extra crops from patches">Greenfingers Aura</div>
+        <img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura.png"/>
+       </li>
+       
     </ul>
   </div>
 
   <!-- Page 2 - Herb Run Page-->
-  <div id="page2" class="page">
+  <div id="page2" class="page active">
     <h2>Herb Runs</h2>
-    <ul class="checklist" >
-      <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">TrollHeim</div>
-        <ul class="sublist">
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)">TrollHeim Teleport</div>
-            <img class ="icon" src="https://runescape.wiki/images/Trollheim_Teleport_icon.png" />
-            <ul class="sublist">
-              <li><div class="bubble" onclick="toggleBubble(this)">2 Fire Runes</div>
-                <img class ="icon" src="https://runescape.wiki/images/Fire_rune.png" /></li>
-              <li><div class="bubble" onclick="toggleBubble(this)">2 Law Runes</div>
-                <img class ="icon" src="https://runescape.wiki/images/Law_rune.png" /></li>
-            </ul>
-          </li>
-          <li><div class="bubble" onclick="toggleBubble(this)">Activate Aura</div>
-            <img class ="icon" src="https://runescape.wiki/images/Legendary_greenfingers_aura.png" /></li>
-          <li><div class="bubble" onclick="toggleBubble(this)">Drink Juju Farming Potion</div>
-            <img class ="icon" src="https://runescape.wiki/images/Juju_farming_potion_(4).png" /></li>
-        </ul>
-      </li>
-      <li class="item">
-        <div class="bubble" onclick="toggleBubble(this)">Al Kharid</div>
-        <ul class="sublist">
-          <li>
-            <div class="bubble" onclick="toggleBubble(this)">Mystical Sand Seed</div>
-            <img class ="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png" />
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <h5>Same rotation for Allotments/Flowers<h5>
+    
+    <!-- Trollheim-->
+    <ul class="checklist">
+  		<li class="item" data-min="29">
+    	<div class="bubble" onclick="toggleBubble(this)" title="We start here, as it's the furthest away from a teleport.">Trollheim</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Trollheim Teleport</div>
+        	<img class="icon" src="https://runescape.wiki/images/Trollheim_Teleport_icon.png"/>
+						<ul class="sublist">
+          		<li class="item" data-min="29">
+            	<div class="bubble" onclick="toggleBubble(this)">2 Fire Runes</div>
+            	<img class="icon" src="https://runescape.wiki/images/Fire_rune.png"/>
+          		</li>
+              
+							<li class="item" data-min="29">
+            	<div class="bubble" onclick="toggleBubble(this)">2 Law Runes</div>
+            	<img class="icon" src="https://runescape.wiki/images/Law_rune.png"/>
+          		</li>
+        		</ul>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+    
+    <!-- Garden of Kharid -->
+    <ul class="checklist">
+  		<li class="item">
+    	<div class="bubble" onclick="toggleBubble(this)">Garden of Kharid</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Mystical Sand Seed</div>
+        	<img class="icon" src="https://runescape.wiki/images/Mystical_sand_seed.png"/>
+      	</li>
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Al Kharid Lodestone</div>
+        	<img class="icon" src="https://runescape.wiki/images/Al_Kharid_lodestone_icon.png"/>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+     
+    <!-- Falador -->
+    <ul class="checklist">
+  		<li class="item">
+    	<div class="bubble" onclick="toggleBubble(this)">Falador</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Explorer's Ring</div>
+        	<img class="icon" src="https://runescape.wiki/images/Explorer's_ring_4.png"/>
+      	</li>
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Draynor Lodestone</div>
+        	<img class="icon" src="https://runescape.wiki/images/Draynor_lodestone_icon.png"/>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+      
+    <!-- Port Phasmatys -->
+    <ul class="checklist">
+  		<li class="item">
+    	<div class="bubble" onclick="toggleBubble(this)">Port Phasmatys</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Ectophial</div>
+        	<img class="icon" src="https://runescape.wiki/images/Ectophial.png"/>
+      	</li>
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Canifis Lodestone</div>
+        	<img class="icon" src="https://runescape.wiki/images/Canifis_lodestone_icon.png"/>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+      
+   <!-- Prifddinas -->
+    <ul class="checklist">
+  		<li class="item" data-min="75">
+    	<div class="bubble" onclick="toggleBubble(this)">Prifddinas</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Attuned Crystal Teleport Seed</div>
+        	<img class="icon" src="https://runescape.wiki/images/Attuned_crystal_teleport_seed.png"/>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+      
+   <!-- Manor Farm -->
+    <ul class="checklist">
+  		<li class="item">
+    	<div class="bubble" onclick="toggleBubble(this)">Manor Farm</div>
+    		<ul class="sublist">
+      	<li class="item" data-min="57">
+        	<div class="bubble" onclick="toggleBubble(this)">Manor Farm Teleport</div>
+        	<img class="icon" src="https://runescape.wiki/images/Manor_farm_Teleport_icon.png"/>
+      	</li>
+        <li class="item" data-max="57">
+        	<div class="bubble" onclick="toggleBubble(this)">Ardougne Lodestone</div>
+        	<img class="icon" src="https://runescape.wiki/images/Ardougne_lodestone_icon.png"/>
+      	</li>  
+    		</ul>
+  		</li>
+		</ul>
+      
+    <!-- Wilderness -->
+    <ul class="checklist">
+  		<li class="item">
+    	<div class="bubble" onclick="toggleBubble(this)">Wilderness</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Wilderness Sword</div>
+        	<img class="icon" src="https://runescape.wiki/images/Wilderness_sword_4.png"/>
+      	</li>
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Wilderness Lodestone</div>
+        	<img class="icon" src="https://runescape.wiki/images/Wilderness_Crater_lodestone_icon.png"/>
+      	</li>  
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)" title ="Option 4">Portable Obelisk (Level 35)</div>
+        	<img class="icon" src="https://runescape.wiki/images/Portable_obelisk.png"/>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+      
+    <!-- Catherby -->
+    <ul class="checklist">
+  		<li class="item">
+    	<div class="bubble" onclick="toggleBubble(this)">Catherby</div>
+    		<ul class="sublist">
+      	<li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Camelot Teleport</div>
+        	<img class="icon" src="https://runescape.wiki/images/Camelot_Teleport_icon.png"/>
+          	<ul class="sublist">
+          		<li class="item">
+            	<div class="bubble" onclick="toggleBubble(this)">5 Air Runes</div>
+            	<img class="icon" src="https://runescape.wiki/images/Air_rune.png"/>
+          		</li>
+              
+							<li class="item">
+            	<div class="bubble" onclick="toggleBubble(this)">1 Law Runes</div>
+            	<img class="icon" src="https://runescape.wiki/images/Law_rune.png"/>
+          		</li>
+        		</ul>
+      	</li>
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)">Catherby Lodestone</div>
+        	<img class="icon" src="https://runescape.wiki/images/Catherby_lodestone_icon.png"/>
+      	</li>
+        <p>OR</p>
+        <li class="item">
+        	<div class="bubble" onclick="toggleBubble(this)" title="3 times per day, maximum">Modified Botanist's Mask</div>
+        	<img class="icon" src="https://runescape.wiki/images/Modified_botanist's_mask.png"/>
+      	</li>
+    		</ul>
+  		</li>
+		</ul>
+      
   </div>
 
   <!-- Page 3 - Tree Runs-->
@@ -425,7 +605,7 @@
     // Hide from list if level is too low
     const form = document.getElementById("filterForm");
     const input = document.getElementById("filterInput");
-    const listItems = document.querySelectorAll("#Checklist li");
+    const listItems = document.querySelectorAll(".checklist li");
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -434,12 +614,11 @@
       listItems.forEach(li => {
         const minValue = parseInt(li.getAttribute("data-min"), 10);
         const maxValue = parseInt(li.getAttribute("data-max"), 10);
-        
-        // If li doesn't have a max, treat it as infinite
-        const maxCheck = isNaN(maxValue) ? Infinity : maxValue;
+
         const minCheck = isNaN(minValue) ? -Infinity : minValue;
-        
-        if (value < minValue || value > maxValue) {
+        const maxCheck = isNaN(maxValue) ? Infinity : maxValue;
+
+        if (value < minCheck || value > maxCheck) {
           li.classList.add("hidden");
         } else {
           li.classList.remove("hidden");
